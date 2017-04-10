@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  registry-backend:
+    image: registry:2
+    ports:
+      - 5000:5000
+    volumes:
+      - ./volume:/var/lib/registry
+    environment:
+      SETTINGS_FLAVOR: local
+      STORAGE_PATH: /var/lib/registry
+      SEARCH_BACKEND: sqlalchemy
+
+  frontend:
+    image: konradkleine/docker-registry-frontend:v2
+    ports:
+      - 5080:80
+    links:
+      - registry-backend
+    environment:
+      ENV_DOCKER_REGISTRY_HOST: registry-backend
+      ENV_DOCKER_REGISTRY_PORT: 5000
