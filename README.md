@@ -3,6 +3,13 @@
 
 ## run
 ```bash
+# clone git repository
+git clone https://github.com/michl-b/docker-registry.git
+
+# create volume folder for regitry backend services
+cd docker-registry
+mkdir volume
+
 # run both containers detached
 docker-compose up -d
 ```
